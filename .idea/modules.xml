@@ -2,7 +2,10 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/eladmin-services/eladmin-security/eladmin-security.iml" filepath="$PROJECT_DIR$/eladmin-services/eladmin-security/eladmin-security.iml" />
+      <module fileurl="file://$PROJECT_DIR$/eladmin-services/eladmin-services.iml" filepath="$PROJECT_DIR$/eladmin-services/eladmin-services.iml" />
       <module fileurl="file://$PROJECT_DIR$/eladmin-springcloud.iml" filepath="$PROJECT_DIR$/eladmin-springcloud.iml" />
+      <module fileurl="file://$PROJECT_DIR$/eladmin-zuul/eladmin-zuul.iml" filepath="$PROJECT_DIR$/eladmin-zuul/eladmin-zuul.iml" />
     </modules>
   </component>
 </project>

@@ -1,0 +1,166 @@
+server:
+  port: 8801
+spring:
+  profiles:
+    active: dev
+    #    include: ${spring.profiles.active}
+  application:
+    name: @artifactId@
+
+  zipkin:
+    sender:
+      type: web
+  #    base-url: http://localhost:9411
+  sleuth:
+    sampler:
+      probability: 1
+  cloud:
+    nacos:
+      discovery:
+        server-addr: http://175.24.50.122:8848/ #配置Nacos地址
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://175.24.50.122:3306/eladmin?characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B8&rewriteBatchedStatements=true
+    username: root
+    password: wyh0626
+
+  # redis配置
+  redis:
+    # Redis数据库索引（默认为0）
+    database: 0
+    # Redis服务器地址
+    host: 175.24.50.122
+    # Redis服务器连接端口
+    port: 2379
+    # Redis服务器连接密码（默认为空）
+    password: 123456
+    jedis:
+      pool:
+        max-active: 8
+        max-wait: -1
+        max-idle: 8
+        min-idle: 0
+      timeout: 5000
+
+#开启所有服务端点权限
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+
+zuul:
+  #zuul网关的饥饿加载
+  ribbon:
+    eager-load:
+      enabled: true
+
+  prefix: /api # 添加路由前缀
+  routes:
+    claim-server-app: /app/**
+    claim-server-approve: /approve/**
+    claim-server-auth: /auth/**
+    claim-server-audit: /audit/**
+    claim-server-hangup: /hangup/**
+    claim-server-noticeser: /noticeser/**
+    claim-server-regist: /regist/**
+    claim-server-report: /report/**
+    claim-server-registers: /registers/**
+    claim-server-nucleus: /nucleus/**
+    claim-server-seconduwall: /seconduwall/**
+    claim-server-user: /user/**
+    claim-server-message: /message/**
+    claim-server-investigation: /investigation/**
+    claim-server-quartz: /quartz/**
+    claim-server-workflow: /workflow/**
+    claim-common-queryservice: /queryservice/**
+    claim-server-matchdutypay: /matchdutypay/**
+    claim-server-print: /print/**
+    claim-server-taskreassignment: /taskreassignment/**
+    claim-server-comprehensive: /comprehensive/**
+    claim-server-manage: /manage/**
+    claim-server-homepage: /homepage/**
+    claim-server-ds: /data/**
+    claim-server-synchronizates: /synchronizates/**
+    claim-server-filedeal: /filedeal/**
+    claim-server-imagedeal: /imagedeal/**
+    claim-server-group: /group/**
+    claim-server-payment: /payment/**
+    claim-server-llclaimcontdeal: /contdeal/**
+    claim-server-wxiamgedeal: /wximagedeal/**
+    claim-server-reportform: /reportform/**
+    claim-server-firstpage: /firstpage/**
+    claim-server-financial: /financial/**
+    claim-server-insurance: /insurance/**
+    claim-server-wxregister: /wxregister/**
+    claim-server-demos: /demo/**
+
+
+
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 100000 # 熔断超时时长：5000ms
+
+ribbon:
+  ConnectTimeout: 100000 # ribbon链接超时时长
+  ReadTimeout: 100000 # ribbon读取超时时长
+  MaxAutoRetries: 0  # 当前服务重试次数
+  MaxAutoRetriesNextServer: 0 # 切换服务重试次数
+  #ribbon的饥饿加载
+  eager-load:
+    enabled: true
+    clients: claim-server-user
+  eureka:
+    enabled: true
+
+##解决跨域问题的配置数据
+#claim:
+#  lis:
+#    allowedOrigins:          #允许向该服务器提交请求的URI，*表示全部允许
+#      #   - http://manage.shop.com
+#      - "*"
+#    #    - http://localhost:10011
+#
+#    allowCredentials: true    #允许cookies跨域
+#    allowedMethods:           #允许提交请求的方法，*表示全部允许
+#      - GET
+#      - POST
+#      - DELETE
+#      - PUT
+#      - OPTIONS
+#    maxAge: 3600              # 预检请求的缓存时间（秒），即在这个时间段里，对于相同的跨域请求不会再预检了
+#    filterPath: /**
+#    allowedHeaders:           #允许访问的头信息,*表示全部
+#      - "*"
+#
+
+logging:
+  level:
+    com:
+      alibaba:
+        nacos:
+          client:
+            naming: error
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
